@@ -13,12 +13,15 @@ import Main from "./Main";
 import { ThemeContext } from "./ThemeContext";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./Header";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 const drawerWidth = 250;
 const styles = (theme) => ({
   root: {
     display: "flex",
     minHeight: "100vh",
+    flexGrow: 1,
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -69,13 +72,21 @@ class Home extends React.Component {
           <Header onDrawerToggle={handleDrawerToggle} />
 
           <main className={this.props.classes.main}>
-            <nav className={this.props.classes.drawer}>
-              <Navigator PaperProps={{ style: { width: drawerWidth } }} />
-            </nav>
-            {/*<Switch>*/}
-            {/*  <Route exact path={"/"} render={(props) => <Main />} />*/}
-            {/*  <Redirect to="/" />*/}
-            {/*</Switch>*/}
+            <div className={styles.root}>
+              <Grid container>
+                <Grid item xs={2}>
+                  <nav className={this.props.classes.drawer}>
+                    <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+                  </nav>
+                </Grid>
+                <Grid item xs={10}>
+                  <Switch>
+                    <Route exact path={"/"} render={(props) => <Main />} />
+                    <Redirect to="/" />
+                  </Switch>
+                </Grid>
+              </Grid>
+            </div>
           </main>
         </div>
       </div>

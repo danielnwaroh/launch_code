@@ -7,8 +7,9 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
-import PeopleIcon from "@material-ui/icons/People";
+import HomeIcon from "@material-ui/icons/Home";
 import DnsRoundedIcon from "@material-ui/icons/DnsRounded";
 import PermMediaOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActual";
 import PublicIcon from "@material-ui/icons/Public";
@@ -17,25 +18,30 @@ import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponen
 import TimerIcon from "@material-ui/icons/Timer";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PhonelinkSetupIcon from "@material-ui/icons/PhonelinkSetup";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import FlightIcon from "@material-ui/icons/Flight";
+import AssessmentIcon from "@material-ui/icons/Assessment";
+import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
+import GroupIcon from "@material-ui/icons/Group";
 
 const categories = [
   {
     id: "Develop",
     children: [
-      { id: "Authentication", icon: <PeopleIcon />, active: true },
-      { id: "Database", icon: <DnsRoundedIcon /> },
-      { id: "Storage", icon: <PermMediaOutlinedIcon /> },
-      { id: "Hosting", icon: <PublicIcon /> },
-      { id: "Functions", icon: <SettingsEthernetIcon /> },
-      { id: "ML Kit", icon: <SettingsInputComponentIcon /> },
+      { id: "Home", icon: <HomeIcon />, active: true },
+      { id: "Quotes", icon: <AttachMoneyIcon /> },
+      { id: "Leads", icon: <DnsRoundedIcon /> },
+      { id: "Tours", icon: <FlightIcon /> },
     ],
   },
   {
     id: "Quality",
     children: [
-      { id: "Analytics", icon: <SettingsIcon /> },
-      { id: "Performance", icon: <TimerIcon /> },
-      { id: "Test Lab", icon: <PhonelinkSetupIcon /> },
+      { id: "Invoices", icon: <InsertDriveFileIcon /> },
+      { id: "Analytics", icon: <AssessmentIcon /> },
+      { id: "Team", icon: <GroupIcon /> },
+      { id: "Admin", icon: <SettingsIcon /> },
+      { id: "Support", icon: <PhonelinkSetupIcon /> },
     ],
   },
 ];
@@ -55,6 +61,7 @@ const styles = (theme) => ({
     "&:hover,&:focus": {
       backgroundColor: "rgba(255, 255, 255, 0.08)",
     },
+    height: 50,
   },
   itemCategory: {
     backgroundColor: "#232f3e",
@@ -89,14 +96,7 @@ const styles = (theme) => ({
 });
 
 function Navigator(props) {
-  setActiveTab();
   const { classes, ...other } = props;
-
-  function setActiveTab() {
-    categories[0].children.forEach((element) => {
-      element.active = window.location.href.includes(element.path);
-    });
-  }
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -112,39 +112,37 @@ function Navigator(props) {
         {/*  Wet Bat*/}
         {/*</ListItem>*/}
         {categories.map(({ id, children }, parentKey) => (
-          <React.Fragment key={parentKey}>
-            {children.map(
-              (
-                { id: childId, icon, active, styleid, path, numIndex },
-                childKey
-              ) => (
-                <Link
-                  to={path}
-                  classes={{
-                    primary: classes.itemPrimary,
-                  }}
-                  className={"linkNoStyle"}
-                  key={childKey}
+          <React.Fragment key={id}>
+            {children.map(({ id: childId, icon, active, path }, childKey) => (
+              <Link
+                to={path}
+                classes={{
+                  primary: classes.itemPrimary,
+                }}
+                className={"linkNoStyle"}
+                key={childKey}
+              >
+                <ListItem
+                  key={childId}
+                  button
+                  className={clsx(
+                    classes.item,
+                    active && classes.itemActiveItem
+                  )}
                 >
-                  <div id={styleid}>
-                    <ListItem
-                      key={childId}
-                      button
-                      className={clsx(
-                        classes.item,
-                        active && classes.itemActiveItem
-                      )}
-                    >
-                      <ListItemIcon className={classes.itemIcon}>
-                        {icon}
-                      </ListItemIcon>
-
-                      {childId}
-                    </ListItem>
-                  </div>
-                </Link>
-              )
-            )}
+                  <ListItemIcon className={classes.itemIcon}>
+                    {icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{
+                      primary: classes.itemPrimary,
+                    }}
+                  >
+                    {childId}
+                  </ListItemText>
+                </ListItem>
+              </Link>
+            ))}
 
             <Divider className={classes.divider} />
           </React.Fragment>

@@ -2,8 +2,6 @@ import React, { createContext, Component } from "react";
 
 export const ThemeContext = createContext();
 
-let tempList = [];
-
 class ThemeContextProvider extends Component {
   constructor(props) {
     super(props);
