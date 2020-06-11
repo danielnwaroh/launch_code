@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { AppBar, TextField } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -44,7 +42,7 @@ class Header extends React.Component {
   static contextType = ThemeContext;
 
   render() {
-    const { classes, title } = this.props;
+    const { classes } = this.props;
 
     return (
       <AppBar
@@ -110,9 +108,6 @@ class Header extends React.Component {
               />
             </Grid>
             <Grid item>
-              {/*<IconButton className={classes.iconButtonAvatar} disabled={true}>*/}
-              {/*  <Avatar>A</Avatar>*/}
-              {/*</IconButton>*/}
               <AccountCircleIcon
                 className={classes.headerIcon}
                 fontSize={"default"}

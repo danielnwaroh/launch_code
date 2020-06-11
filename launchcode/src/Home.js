@@ -1,20 +1,13 @@
 import React from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Navigator from "./Navigator";
-// import RadarChart from "./RadarChart";
 import Main from "./Main";
 import { ThemeContext } from "./ThemeContext";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./Header";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 
 const drawerWidth = 250;
 const styles = (theme) => ({
