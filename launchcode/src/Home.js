@@ -9,7 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./Header";
 import Grid from "@material-ui/core/Grid";
 
-const drawerWidth = 250;
+const drawerWidth = "100%";
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -20,6 +20,7 @@ const styles = (theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
       flexShrink: 0,
+      height: "100%",
     },
   },
   app: {
@@ -65,7 +66,7 @@ class Home extends React.Component {
           <Header onDrawerToggle={handleDrawerToggle} />
 
           <main className={this.props.classes.main}>
-            <div className={styles.root}>
+            <div id={"parentDiv"} className={styles.root}>
               <Grid container>
                 <Grid item xs={2}>
                   <nav className={this.props.classes.drawer}>
@@ -75,6 +76,16 @@ class Home extends React.Component {
                 <Grid item xs={10}>
                   <Switch>
                     <Route exact path={"/"} render={(props) => <Main />} />
+                    <Route
+                      exact
+                      path={"/courses"}
+                      render={(props) => <Main />}
+                    />
+                    <Route
+                      exact
+                      path={"/quotes"}
+                      render={(props) => <Main />}
+                    />
                     <Redirect to="/" />
                   </Switch>
                 </Grid>

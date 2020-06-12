@@ -23,8 +23,8 @@ const categories = [
   {
     id: "Develop",
     children: [
-      { id: "Home", icon: <HomeIcon />, active: true },
-      { id: "Quotes", icon: <AttachMoneyIcon /> },
+      { id: "Home", icon: <HomeIcon />, path: "/", active: true },
+      { id: "Quotes", icon: <AttachMoneyIcon />, path: "/quotes" },
       { id: "Leads", icon: <DnsRoundedIcon /> },
       { id: "Tours", icon: <FlightIcon /> },
     ],
@@ -114,8 +114,8 @@ function Navigator(props) {
                 classes={{
                   primary: classes.itemPrimary,
                 }}
-                className={"linkNoStyle"}
                 key={childKey}
+                style={{ textDecoration: "none" }}
               >
                 <ListItem
                   key={childId}

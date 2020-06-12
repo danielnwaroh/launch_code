@@ -37,10 +37,36 @@
   }
 }
 
+#parentDiv {
+  height:100%;
+}
+
 .MuiDrawer-paper {
   position: relative !important;
 }
 
+.MuiDrawer-docked {
+  height: 100%;
+}
+
+.MuiGrid-container {
+  height: 100%;
+}
+
 .MuiGrid-spacing-xs-2 > .MuiGrid-item {
   padding: 0px 8px !important;
+}
+
+.MuiFilledInput-root {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+#addQuoteBtn {
+  height: 100%;
+  width: 100%;
+  background-color: #5BBFBA;
+  border-radius: 75px;
+  color: white;
+  font-weight: bold;
 }
