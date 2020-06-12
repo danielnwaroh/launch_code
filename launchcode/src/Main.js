@@ -6,24 +6,19 @@ import {
   Button,
   CardContent,
   Card,
-  CardActions,
-  CardActionArea,
-  CardHeader,
   Divider,
   FormControl,
   Grid,
   Select,
   MenuItem,
-  IconButton,
   InputLabel,
-  Tooltip,
   TextField,
   Paper,
   Typography,
-  AppBar,
 } from "@material-ui/core";
 import FastForwardOutlinedIcon from "@material-ui/icons/FastForwardOutlined";
-import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import CreateQuote from "./CreateQuote";
 
 const classes = makeStyles((theme) => ({
   root: {
@@ -51,10 +46,6 @@ class Main extends React.Component {
     console.log("hello");
 
     return (
-      // <div>
-      //   {/*<Header />*/}
-      //   main page
-      // </div>
       <div className={classes.root} style={{ padding: "25px" }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -92,7 +83,7 @@ class Main extends React.Component {
             </Paper>
           </Grid>
           <Grid item xs={4}>
-            {/*<Paper className={classes.paper}>xs=4</Paper>*/}
+            {/*<CreateQuote/>*/}
             <Card className={classes.root}>
               <Grid container spacing={1}>
                 <Grid item>
@@ -103,10 +94,10 @@ class Main extends React.Component {
                     Quick Quote
                   </Typography>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item>
                   {/*<Tooltip title={"Edit"}>*/}
                   {/*<IconButton>*/}
-                  <FullscreenIcon
+                  <AspectRatioIcon
                     style={{ float: "right" }}
                     fontSize={"large"}
                   />
@@ -128,7 +119,6 @@ class Main extends React.Component {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    {/*<Paper className={classes.paper}>xs=6</Paper>*/}
                     <TextField
                       id="filled-basic"
                       label="DESTINATION"
@@ -167,7 +157,6 @@ class Main extends React.Component {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    {/*<Paper className={classes.paper}>xs=6</Paper>*/}
                     <FormControl
                       variant="filled"
                       className={classes.formControl}
@@ -231,7 +220,7 @@ class Main extends React.Component {
                   </Grid>
                   <Grid item xs={6}>
                     <Button id={"addQuoteBtn"} color="primary">
-                      Cancel
+                      Create a quote
                     </Button>
                   </Grid>
                 </Grid>
