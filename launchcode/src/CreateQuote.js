@@ -30,15 +30,96 @@ const classes = makeStyles((theme) => ({
   },
 }));
 
+let fromFieldVar = "";
+let destinationFieldVar = "";
+let departDateField = "";
+let returnDateField = "";
+let nameField = "";
+
 class CreateQuote extends React.Component {
   static contextType = ThemeContext;
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fromField: "",
+      courseDescription: "",
+      peopleField: " ",
+      transportField: " ",
+      quoteObj: {},
+    };
+    this.setFromField = this.setFromField.bind(this);
+    this.setDestinationField = this.setDestinationField.bind(this);
+    this.setDepartDateField = this.setDepartDateField.bind(this);
+    this.setReturnDateField = this.setReturnDateField.bind(this);
+    this.setPeopleField = this.setPeopleField.bind(this);
+    this.setTransportationField = this.setTransportationField.bind(this);
+    this.setNameField = this.setNameField.bind(this);
+    this.createQuote = this.createQuote.bind(this);
   }
 
   componentDidMount() {
     console.log("mount");
+  }
+
+  setFromField(e) {
+    console.log(e.target.value);
+    // this.setState({})
+    fromFieldVar = e.target.value;
+  }
+
+  setDestinationField(e) {
+    console.log(e.target.value);
+    destinationFieldVar = e.target.value;
+  }
+
+  setDepartDateField(e) {
+    console.log(e.target.value);
+    departDateField = e.target.value;
+  }
+
+  setReturnDateField(e) {
+    console.log(e.target.value);
+    returnDateField = e.target.value;
+  }
+
+  setPeopleField(e) {
+    console.log(e.target.value);
+    this.setState({ peopleField: e.target.value });
+  }
+
+  setTransportationField(e) {
+    console.log(e.target.value);
+    this.setState({ transportField: e.target.value });
+  }
+
+  setNameField(e) {
+    console.log(e.target.value);
+    nameField = e.target.value;
+  }
+
+  createQuote() {
+    console.log(fromFieldVar);
+    this.setState({
+      quoteObj: {
+        from: fromFieldVar,
+        destination: destinationFieldVar,
+        depart: departDateField,
+        return: returnDateField,
+        people: this.state.peopleField,
+        transportation: this.state.transportField,
+        name: nameField,
+      },
+    });
+    console.log(this.state.quoteObj);
+    this.props.onCreateQuote({
+      from: fromFieldVar,
+      destination: destinationFieldVar,
+      depart: departDateField,
+      return: returnDateField,
+      people: this.state.peopleField,
+      transportation: this.state.transportField,
+      name: nameField,
+    });
   }
 
   render() {
@@ -54,11 +135,7 @@ class CreateQuote extends React.Component {
             </Typography>
           </Grid>
           <Grid item>
-            {/*<Tooltip title={"Edit"}>*/}
-            {/*<IconButton>*/}
             <AspectRatioIcon style={{ float: "right" }} fontSize={"large"} />
-            {/*</IconButton>*/}
-            {/*</Tooltip>*/}
           </Grid>
         </Grid>
         <Divider />
@@ -72,6 +149,7 @@ class CreateQuote extends React.Component {
                   shrink: true,
                 }}
                 variant="filled"
+                onChange={this.setFromField}
               />
             </Grid>
             <Grid item xs={6}>
@@ -82,6 +160,7 @@ class CreateQuote extends React.Component {
                   shrink: true,
                 }}
                 variant="filled"
+                onChange={this.setDestinationField}
               />
             </Grid>
             <Grid item xs={6}>
@@ -90,12 +169,13 @@ class CreateQuote extends React.Component {
                 id="filled-basic"
                 label="DEPART DATE"
                 type="date"
-                defaultValue="2017-05-24"
+                defaultValue="2020-05-24"
                 // className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 variant="filled"
+                onChange={this.setDepartDateField}
               />
             </Grid>
             <Grid item xs={6}>
@@ -104,12 +184,13 @@ class CreateQuote extends React.Component {
                 id="filled-basic"
                 label="RETURN DATE"
                 type="date"
-                defaultValue="2017-05-24"
+                defaultValue="2020-05-24"
                 // className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 variant="filled"
+                onChange={this.setReturnDateField}
               />
             </Grid>
             <Grid item xs={6}>
@@ -124,8 +205,8 @@ class CreateQuote extends React.Component {
                 <Select
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
-                  value={"age"}
-                  // onChange={handleChange}
+                  value={this.state.peopleField}
+                  onChange={this.setPeopleField}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -134,7 +215,7 @@ class CreateQuote extends React.Component {
                   <MenuItem value={2}>Two</MenuItem>
                   <MenuItem value={3}>Three</MenuItem>
                   <MenuItem value={4}>Four</MenuItem>
-                  <MenuItem value={5}>Five or More</MenuItem>
+                  <MenuItem value={50}>Five or More</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -150,8 +231,8 @@ class CreateQuote extends React.Component {
                 <Select
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
-                  value={"age"}
-                  // onChange={handleChange}
+                  value={this.state.transportField}
+                  onChange={this.setTransportationField}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -172,10 +253,15 @@ class CreateQuote extends React.Component {
                   shrink: true,
                 }}
                 variant="filled"
+                onChange={this.setNameField}
               />
             </Grid>
             <Grid item xs={6}>
-              <Button id={"addQuoteBtn"} color="primary">
+              <Button
+                id={"addQuoteBtn"}
+                color="primary"
+                onClick={() => this.createQuote()}
+              >
                 Create a quote
               </Button>
             </Grid>
