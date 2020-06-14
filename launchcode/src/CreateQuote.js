@@ -1,10 +1,12 @@
 import React from "react";
+import axios from "axios";
 import "./App.css";
 import { ThemeContext } from "./ThemeContext";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   CardContent,
+  CardActions,
   Card,
   Divider,
   FormControl,
@@ -99,18 +101,22 @@ class CreateQuote extends React.Component {
 
   createQuote() {
     console.log(fromFieldVar);
+    let tempQuote = {
+      from: fromFieldVar,
+      destination: destinationFieldVar,
+      depart: departDateField,
+      return: returnDateField,
+      people: this.state.peopleField,
+      transportation: this.state.transportField,
+      name: nameField,
+    };
     this.setState({
-      quoteObj: {
-        from: fromFieldVar,
-        destination: destinationFieldVar,
-        depart: departDateField,
-        return: returnDateField,
-        people: this.state.peopleField,
-        transportation: this.state.transportField,
-        name: nameField,
-      },
+      quoteObj: tempQuote,
     });
     console.log(this.state.quoteObj);
+    axios.post("http://localhost:4000/quotes", tempQuote).then((response) => {
+      console.log(response.data);
+    });
     this.props.onCreateQuote({
       from: fromFieldVar,
       destination: destinationFieldVar,
@@ -123,9 +129,10 @@ class CreateQuote extends React.Component {
   }
 
   render() {
+    console.log(this.context);
     return (
       <Card className={classes.root}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} style={{ paddingTop: "10px" }}>
           <Grid item>
             <FastForwardOutlinedIcon fontSize={"large"} />
           </Grid>
@@ -134,9 +141,9 @@ class CreateQuote extends React.Component {
               Quick Quote
             </Typography>
           </Grid>
-          <Grid item>
-            <AspectRatioIcon style={{ float: "right" }} fontSize={"large"} />
-          </Grid>
+          {/*<Grid item>*/}
+          {/*  <AspectRatioIcon style={{ float: "right" }} fontSize={"large"} />*/}
+          {/*</Grid>*/}
         </Grid>
         <Divider />
         <CardContent>
@@ -267,6 +274,9 @@ class CreateQuote extends React.Component {
             </Grid>
           </Grid>
         </CardContent>
+        <CardActions style={{ float: "right" }}>
+          <AspectRatioIcon fontSize={"small"} />
+        </CardActions>
       </Card>
     );
   }
