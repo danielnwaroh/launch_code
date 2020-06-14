@@ -54,7 +54,7 @@ class DisplayRevenue extends React.Component {
   render() {
     return (
       <Card className={classes.root}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} style={{ paddingTop: "10px" }}>
           <Grid item>
             <EqualizerSharpIcon fontSize={"large"} />
           </Grid>

@@ -8,6 +8,7 @@ import DisplayQuotes from "./DisplayQuotes";
 import DisplayLeads from "./DisplayLeads";
 import DisplayRevenue from "./DisplayRevenue";
 import DisplayPotentialRevenue from "./DisplayPotentialRevenue";
+import DisplayCloseRatios from "./DisplayCloseRatios";
 
 const classes = makeStyles((theme) => ({
   root: {
@@ -102,7 +103,8 @@ class Main extends React.Component {
             <DisplayPotentialRevenue />
           </Grid>
           <Grid item xs={4}>
-            <Paper className={classes.paper}>xs=4</Paper>
+            {/*<Paper className={classes.paper}>xs=4</Paper>*/}
+            <DisplayCloseRatios />
           </Grid>
         </Grid>
       </div>

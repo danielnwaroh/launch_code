@@ -141,9 +141,6 @@ class CreateQuote extends React.Component {
               Quick Quote
             </Typography>
           </Grid>
-          {/*<Grid item>*/}
-          {/*  <AspectRatioIcon style={{ float: "right" }} fontSize={"large"} />*/}
-          {/*</Grid>*/}
         </Grid>
         <Divider />
         <CardContent>

@@ -37,13 +37,13 @@ function createData(id, name, destination, price) {
   return { id, name, destination, price };
 }
 
-const rows = [
-  createData(1, "Daniel", "YYC", 24),
-  createData(2, "Adam", "YYC", 37),
-  createData(3, "James", "YYC", 24),
-  createData(4, "Josh", "YYC", 67),
-  createData(5, "Sam", "YYC", 49),
-];
+// const rows = [
+//   createData(1, "Daniel", "YYC", 24),
+//   createData(2, "Adam", "YYC", 37),
+//   createData(3, "James", "YYC", 24),
+//   createData(4, "Josh", "YYC", 67),
+//   createData(5, "Sam", "YYC", 49),
+// ];
 
 class DisplayQuote extends React.Component {
   static contextType = ThemeContext;
@@ -59,6 +59,20 @@ class DisplayQuote extends React.Component {
   }
 
   render() {
+    const { quotes } = this.context;
+    console.log(quotes);
+    let rows = [];
+    quotes.forEach(function (quote) {
+      rows.push(
+        createData(
+          quote.idquotes,
+          quote.name,
+          quote.destinationLocation,
+          quote.price
+        )
+      );
+    });
+    console.log(rows);
     return (
       <div>
         <Card className={classes.root}>

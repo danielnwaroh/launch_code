@@ -10,9 +10,9 @@ import {
   Typography,
   CardActions,
 } from "@material-ui/core";
-import EqualizerSharpIcon from "@material-ui/icons/EqualizerSharp";
+import PieChartOutlinedIcon from "@material-ui/icons/PieChartOutlined";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const classes = makeStyles((theme) => ({
   root: {
@@ -23,11 +23,25 @@ const classes = makeStyles((theme) => ({
   },
 }));
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+const data1 = [
+  { name: "Car", value: 400 },
+  { name: "Plane", value: 300 },
+  { name: "Boat", value: 300 },
+  { name: "Other", value: 200 },
+];
+
+const data2 = [
+  { name: "Edmonton", value: 100 },
+  { name: "Toronto", value: 800 },
+  { name: "Banff", value: 200 },
+  { name: "Toronto", value: 200 },
+];
+
+const data3 = [
+  { name: "Group A", value: 250 },
+  { name: "Group B", value: 250 },
+  { name: "Group C", value: 250 },
+  { name: "Group D", value: 250 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -46,9 +60,9 @@ class DisplayPotentialRevenue extends React.Component {
   render() {
     return (
       <Card className={classes.root}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} style={{ paddingTop: "10px" }}>
           <Grid item>
-            <EqualizerSharpIcon fontSize={"large"} />
+            <PieChartOutlinedIcon fontSize={"large"} />
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="h5" component="h2">
@@ -61,15 +75,15 @@ class DisplayPotentialRevenue extends React.Component {
           <Grid container spacing={3}>
             <PieChart width={363} height={350}>
               <Pie
-                data={data}
+                data={data1}
                 cx={50}
-                cy={200}
+                cy={175}
                 labelLine={false}
-                outerRadius={40}
+                outerRadius={50}
                 fill="#8884d8"
                 dataKey="value"
               >
-                {data.map((entry, index) => (
+                {data1.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
@@ -77,15 +91,15 @@ class DisplayPotentialRevenue extends React.Component {
                 ))}
               </Pie>
               <Pie
-                data={data}
-                cx={150}
-                cy={200}
+                data={data2}
+                cx={170}
+                cy={175}
                 labelLine={false}
-                outerRadius={40}
+                outerRadius={50}
                 fill="#8884d8"
                 dataKey="value"
               >
-                {data.map((entry, index) => (
+                {data2.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
@@ -93,21 +107,22 @@ class DisplayPotentialRevenue extends React.Component {
                 ))}
               </Pie>
               <Pie
-                data={data}
-                cx={250}
-                cy={200}
+                data={data3}
+                cx={300}
+                cy={175}
                 labelLine={false}
-                outerRadius={40}
+                outerRadius={50}
                 fill="#8884d8"
                 dataKey="value"
               >
-                {data.map((entry, index) => (
+                {data3.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
                   />
                 ))}
               </Pie>
+              <Tooltip />
             </PieChart>
           </Grid>
         </CardContent>

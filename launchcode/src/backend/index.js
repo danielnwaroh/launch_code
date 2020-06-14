@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
+var uniqid = require("uniqid");
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -58,6 +59,9 @@ app.post("/quotes", jsonParser, function (req, res) {
   let CREATE_QUOTE_QUERY =
     "CALL create_quote(" +
     "'" +
+    uniqid.time() +
+    "'" +
+    ", '" +
     req.body.from +
     "'" +
     ", '" +

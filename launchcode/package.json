@@ -13,7 +13,9 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "shortid": "^2.2.15",
+    "uniqid": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
