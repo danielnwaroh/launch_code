@@ -54,19 +54,17 @@ class Main extends React.Component {
             <CreateQuote onCreateQuote={this.handleQuoteCreation} />
           </Grid>
           <Grid item xs={4}>
-            {/*<Paper className={classes.paper}>xs=4</Paper>*/}
             <DisplayQuotes />
           </Grid>
           <Grid item xs={4}>
-            {/*<Paper className={classes.paper}>xs=4</Paper>*/}
             <DisplayLeads />
           </Grid>
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>xs=8</Paper>
-          </Grid>
-          <Grid item xs={4}>
-            <Paper className={classes.paper}>xs=4</Paper>
-          </Grid>
+          {/*<Grid item xs={8}>*/}
+          {/*  <Paper className={classes.paper}>xs=8</Paper>*/}
+          {/*</Grid>*/}
+          {/*<Grid item xs={4}>*/}
+          {/*  <Paper className={classes.paper}>xs=4</Paper>*/}
+          {/*</Grid>*/}
           <Grid item xs={4}>
             <DisplayRevenue />
           </Grid>
@@ -74,7 +72,6 @@ class Main extends React.Component {
             <DisplayPotentialRevenue />
           </Grid>
           <Grid item xs={4}>
-            {/*<Paper className={classes.paper}>xs=4</Paper>*/}
             <DisplayCloseRatios />
           </Grid>
         </Grid>
