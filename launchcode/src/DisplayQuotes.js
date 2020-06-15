@@ -9,19 +9,30 @@ import {
   Grid,
   Typography,
   CardActions,
-  TableCell,
-  TableBody,
-  TableRow,
-  Table,
-  TableContainer,
-  TableHead,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Avatar,
+  Dialog,
+  Button,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@material-ui/core";
 import HistoryIcon from "@material-ui/icons/History";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CachedIcon from "@material-ui/icons/Cached";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const classes = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
   },
   paper: {
     padding: theme.spacing(2),
@@ -33,17 +44,45 @@ const classes = makeStyles((theme) => ({
   },
 }));
 
-function createData(id, name, destination, price) {
-  return { id, name, destination, price };
+function createData(
+  id,
+  name,
+  transportation,
+  from,
+  destination,
+  depart,
+  returnDate,
+  numPeople,
+  price
+) {
+  depart = parseDate(depart);
+  returnDate = parseDate(returnDate);
+  numPeople = convertPeopleCount(numPeople);
+  return {
+    id,
+    name,
+    transportation,
+    from,
+    destination,
+    depart,
+    returnDate,
+    numPeople,
+    price,
+  };
 }
 
-// const rows = [
-//   createData(1, "Daniel", "YYC", 24),
-//   createData(2, "Adam", "YYC", 37),
-//   createData(3, "James", "YYC", 24),
-//   createData(4, "Josh", "YYC", 67),
-//   createData(5, "Sam", "YYC", 49),
-// ];
+function parseDate(paramDate) {
+  let newDate = paramDate.split("T");
+  return newDate[0];
+}
+
+function convertPeopleCount(paramPeople) {
+  if (paramPeople === 10) {
+    return "5+";
+  } else {
+    return paramPeople;
+  }
+}
 
 class DisplayQuote extends React.Component {
   static contextType = ThemeContext;
@@ -51,28 +90,55 @@ class DisplayQuote extends React.Component {
     super(props);
     this.state = {
       fromField: "",
+      open: false,
+      selectedQuote: {},
     };
+    this.deleteQuote = this.deleteQuote.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
   }
 
-  componentDidMount() {
-    console.log("mount");
+  componentDidMount() {}
+
+  deleteQuote(val) {
+    console.log(val);
+    console.log("deleted");
+    axios
+      .post("http://localhost:4000/deleteQuote", { id: val.id })
+      .then((response) => {
+        console.log(response.data);
+      });
+    this.setState({ open: false });
+    window.location.reload(false);
+  }
+
+  handleClickOpen(val) {
+    this.setState({ open: true, selectedQuote: val });
+  }
+
+  handleClose() {
+    this.setState({ open: false });
   }
 
   render() {
     const { quotes } = this.context;
-    console.log(quotes);
+    const { selectedQuote } = this.state;
     let rows = [];
     quotes.forEach(function (quote) {
       rows.push(
         createData(
           quote.idquotes,
           quote.name,
+          quote.transportation,
+          quote.fromLocation,
           quote.destinationLocation,
+          quote.departDate,
+          quote.returnDate,
+          quote.numPeople,
           quote.price
         )
       );
     });
-    console.log(rows);
     return (
       <div>
         <Card className={classes.root}>
@@ -89,42 +155,68 @@ class DisplayQuote extends React.Component {
           <Divider />
           <CardContent style={{ height: "328px" }}>
             <Grid container spacing={3}>
-              <TableContainer
-                style={{ overflowX: "hidden", maxHeight: "328px" }}
-              >
-                <Table
-                  className={classes.table}
-                  // size="small"
-                  aria-label="simple table"
-                >
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>ID#</TableCell>
-                      <TableCell align="right">NAME</TableCell>
-                      <TableCell align="right">DESTINATION</TableCell>
-                      <TableCell align="right">PRICE($)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow key={row.id}>
-                        <TableCell component="th" scope="row">
-                          {row.id}
-                        </TableCell>
-                        <TableCell align="right">{row.name}</TableCell>
-                        <TableCell align="right">{row.destination}</TableCell>
-                        <TableCell align="right">{row.price}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <List dense={false} style={{ width: "100%" }}>
+                {rows.map((row) => (
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <CachedIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={row.name}
+                      secondary={"$" + row.price}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => this.handleClickOpen(row)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+              </List>
             </Grid>
           </CardContent>
-          <CardActions style={{ float: "right" }}>
-            <AspectRatioIcon fontSize={"small"} />
-          </CardActions>
+          <Link to={"/quotes"} style={{ textDecoration: "none" }}>
+            <CardActions style={{ float: "right", color: "black" }}>
+              <AspectRatioIcon fontSize={"small"} />
+            </CardActions>
+          </Link>
         </Card>
+        <Dialog
+          onClose={this.handleClose}
+          aria-labelledby="simple-dialog-title"
+          open={this.state.open}
+        >
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete this quote?
+            </DialogContentText>
+            <DialogContentText>
+              Name: {selectedQuote.name} <br />
+              From: {selectedQuote.from} on {selectedQuote.depart} <br />
+              To: {selectedQuote.destination} on {selectedQuote.returnDate}{" "}
+              <br />
+              Transportation: {selectedQuote.transportation} <br />
+              Price: ${selectedQuote.price}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={() => this.deleteQuote(this.state.selectedQuote)}
+              color="primary"
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

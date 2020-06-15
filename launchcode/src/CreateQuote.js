@@ -32,6 +32,14 @@ const classes = makeStyles((theme) => ({
   },
 }));
 
+const transportationPrice = {
+  Car: 100,
+  Bicycle: 15,
+  Helicopter: 250,
+  Plane: 200,
+  Bus: 50,
+};
+
 let fromFieldVar = "";
 let destinationFieldVar = "";
 let departDateField = "";
@@ -91,6 +99,7 @@ class CreateQuote extends React.Component {
 
   setTransportationField(e) {
     console.log(e.target.value);
+    console.log(e);
     this.setState({ transportField: e.target.value });
   }
 
@@ -100,7 +109,9 @@ class CreateQuote extends React.Component {
   }
 
   createQuote() {
-    console.log(fromFieldVar);
+    let calcPrice =
+      this.state.peopleField * transportationPrice[this.state.transportField];
+
     let tempQuote = {
       from: fromFieldVar,
       destination: destinationFieldVar,
@@ -109,6 +120,7 @@ class CreateQuote extends React.Component {
       people: this.state.peopleField,
       transportation: this.state.transportField,
       name: nameField,
+      price: calcPrice,
     };
     this.setState({
       quoteObj: tempQuote,
@@ -219,7 +231,7 @@ class CreateQuote extends React.Component {
                   <MenuItem value={2}>Two</MenuItem>
                   <MenuItem value={3}>Three</MenuItem>
                   <MenuItem value={4}>Four</MenuItem>
-                  <MenuItem value={50}>Five or More</MenuItem>
+                  <MenuItem value={10}>Five or More</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -241,11 +253,11 @@ class CreateQuote extends React.Component {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={1}>Car</MenuItem>
-                  <MenuItem value={2}>Bicycle</MenuItem>
-                  <MenuItem value={3}>Helicopter</MenuItem>
-                  <MenuItem value={4}>Plane</MenuItem>
-                  <MenuItem value={5}>Bus</MenuItem>
+                  <MenuItem value={"Car"}>Car</MenuItem>
+                  <MenuItem value={"Bicycle"}>Bicycle</MenuItem>
+                  <MenuItem value={"Helicopter"}>Helicopter</MenuItem>
+                  <MenuItem value={"Plane"}>Plane</MenuItem>
+                  <MenuItem value={"Bus"}>Bus</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

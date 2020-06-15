@@ -16,9 +16,7 @@ class ThemeContextProvider extends Component {
     this.getQuotes();
   }
 
-  componentDidMount() {
-    console.log("mount");
-  }
+  componentDidMount() {}
 
   getQuotes() {
     axios.get("http://localhost:4000/quotes").then((response) => {

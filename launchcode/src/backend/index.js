@@ -46,16 +46,6 @@ app.post("/quotes", jsonParser, function (req, res) {
   console.log(req.body);
   res.send("It worked!");
 
-  // let CREATE_QUOTE_QUERY =
-  //   "INSERT INTO quotes (fromLocation, destinationLocation, departDate, returnDate, numPeople, transportation, name, price) VALUES (${req.body.from}, ${req.body.destination}, ${req.body.depart}, ${req.body.return}, ${req.body.people}, ${req.body.transportation}, ${req.body.name}, '10')";
-
-  // let CREATE_QUOTE_QUERY =
-  //   "INSERT INTO quotes (fromLocation, destinationLocation, departDate, returnDate, numPeople, transportation, name, price) VALUES (" +
-  //   "'" +
-  //   req.body.from +
-  //   "'" +
-  //   ", 'YYZ', '2020-07-13', '2020-08-01', '1', 'Boat', 'Tim', '10');";
-
   let CREATE_QUOTE_QUERY =
     "CALL create_quote(" +
     "'" +
@@ -83,7 +73,7 @@ app.post("/quotes", jsonParser, function (req, res) {
     req.body.name +
     "'" +
     ", '" +
-    10 +
+    req.body.price +
     "')";
   connection.query(CREATE_QUOTE_QUERY, (err, results) => {
     if (err) {
@@ -92,6 +82,21 @@ app.post("/quotes", jsonParser, function (req, res) {
       return res.send(err);
     } else {
       console.log("1 record inserted");
+    }
+  });
+});
+
+app.post("/deleteQuote", jsonParser, function (req, res) {
+  console.log(req.body);
+  let DELETE_QUOTE_QUERY = "CALL delete_quote(" + "'" + req.body.id + "')";
+  connection.query(DELETE_QUOTE_QUERY, (err, results) => {
+    if (err) {
+      console.log("went wrong post");
+      console.log(DELETE_QUOTE_QUERY);
+      return res.send(err);
+    } else {
+      res.send("Deleted record");
+      console.log("1 record deleted");
     }
   });
 });

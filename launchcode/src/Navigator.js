@@ -23,7 +23,7 @@ const categories = [
   {
     id: "Develop",
     children: [
-      { id: "Home", icon: <HomeIcon />, path: "/", active: true },
+      { id: "Home", icon: <HomeIcon />, path: "/home", active: true },
       { id: "Quotes", icon: <AttachMoneyIcon />, path: "/quotes" },
       { id: "Leads", icon: <DnsRoundedIcon /> },
       { id: "Tours", icon: <FlightIcon /> },
@@ -92,20 +92,23 @@ const styles = (theme) => ({
 
 function Navigator(props) {
   const { classes, ...other } = props;
+  // Gets course code from url
+  setActiveTab();
+
+  function setActiveTab() {
+    categories[0].children.forEach((element) => {
+      if (window.location.href.includes(element.path)) {
+        element.active = true;
+      } else {
+        element.active = false;
+      }
+      // element.active = window.location.href.includes(element.path);
+    });
+  }
 
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        {/*<ListItem*/}
-        {/*  className={clsx(*/}
-        {/*    classes.firebase,*/}
-        {/*    classes.item,*/}
-        {/*    classes.itemCategory,*/}
-        {/*    classes.logoWrap*/}
-        {/*  )}*/}
-        {/*>*/}
-        {/*  Wet Bat*/}
-        {/*</ListItem>*/}
         {categories.map(({ id, children }, parentKey) => (
           <React.Fragment key={id}>
             {children.map(({ id: childId, icon, active, path }, childKey) => (

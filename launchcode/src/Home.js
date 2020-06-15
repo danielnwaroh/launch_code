@@ -8,6 +8,7 @@ import { ThemeContext } from "./ThemeContext";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./Header";
 import Grid from "@material-ui/core/Grid";
+import Quotes from "./Quotes";
 
 const drawerWidth = "100%";
 const styles = (theme) => ({
@@ -75,18 +76,13 @@ class Home extends React.Component {
                 </Grid>
                 <Grid item xs={10}>
                   <Switch>
-                    <Route exact path={"/"} render={(props) => <Main />} />
-                    <Route
-                      exact
-                      path={"/courses"}
-                      render={(props) => <Main />}
-                    />
+                    <Route exact path={"/home"} render={(props) => <Main />} />
                     <Route
                       exact
                       path={"/quotes"}
-                      render={(props) => <Main />}
+                      render={(props) => <Quotes />}
                     />
-                    <Redirect to="/" />
+                    <Redirect to="/home" />
                   </Switch>
                 </Grid>
               </Grid>
