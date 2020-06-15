@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 app.get("/quotes", (req, res) => {
   connection.query(SELECT_ALL_QUOTES_QUERY, (err, results) => {
     if (err) {
-      console.log("went wrong");
+      console.log("something went wrong");
       return res.send(err);
     } else {
       return res.json({ data: results });
