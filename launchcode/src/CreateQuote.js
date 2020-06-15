@@ -15,7 +15,6 @@ import {
   MenuItem,
   InputLabel,
   TextField,
-  Paper,
   Typography,
 } from "@material-ui/core";
 import FastForwardOutlinedIcon from "@material-ui/icons/FastForwardOutlined";
@@ -42,8 +41,8 @@ const transportationPrice = {
 
 let fromFieldVar = "";
 let destinationFieldVar = "";
-let departDateField = "";
-let returnDateField = "";
+let departDateField = "2020-06-14";
+let returnDateField = "2020-06-21";
 let nameField = "";
 
 class CreateQuote extends React.Component {
@@ -166,6 +165,7 @@ class CreateQuote extends React.Component {
                 }}
                 variant="filled"
                 onChange={this.setFromField}
+                placeholder={"e.g. YYC or Calgary"}
               />
             </Grid>
             <Grid item xs={6}>
@@ -177,6 +177,7 @@ class CreateQuote extends React.Component {
                 }}
                 variant="filled"
                 onChange={this.setDestinationField}
+                placeholder={"e.g. YYZ or Toronto"}
               />
             </Grid>
             <Grid item xs={6}>
@@ -185,7 +186,7 @@ class CreateQuote extends React.Component {
                 id="filled-basic"
                 label="DEPART DATE"
                 type="date"
-                defaultValue="2020-05-24"
+                defaultValue="2020-06-14"
                 // className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
@@ -200,7 +201,7 @@ class CreateQuote extends React.Component {
                 id="filled-basic"
                 label="RETURN DATE"
                 type="date"
-                defaultValue="2020-05-24"
+                defaultValue="2020-06-21"
                 // className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
@@ -270,6 +271,7 @@ class CreateQuote extends React.Component {
                 }}
                 variant="filled"
                 onChange={this.setNameField}
+                placeholder={"e.g. Daniel"}
               />
             </Grid>
             <Grid item xs={6}>

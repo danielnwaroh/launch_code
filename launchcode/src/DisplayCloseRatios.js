@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import GroupWorkIcon from "@material-ui/icons/GroupWork";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
-import { PieChart, Pie, Cell, Tooltip, Sector } from "recharts";
+import { PieChart, Pie, Sector } from "recharts";
 
 const classes = makeStyles((theme) => ({
   root: {
@@ -105,8 +105,6 @@ const renderActiveShape = (props) => {
   );
 };
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
 class DisplayCloseRatios extends React.Component {
   static contextType = ThemeContext;
   constructor(props) {
@@ -145,6 +143,7 @@ class DisplayCloseRatios extends React.Component {
           <Grid container spacing={3}>
             <PieChart width={363} height={350}>
               <Pie
+                dataKey="value"
                 activeIndex={this.state.activeIndex}
                 activeShape={renderActiveShape}
                 data={data}

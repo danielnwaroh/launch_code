@@ -9,6 +9,7 @@ import DisplayLeads from "./DisplayLeads";
 import DisplayRevenue from "./DisplayRevenue";
 import DisplayPotentialRevenue from "./DisplayPotentialRevenue";
 import DisplayCloseRatios from "./DisplayCloseRatios";
+import Dashboard from "./Dashboard";
 
 const classes = makeStyles((theme) => ({
   root: {
@@ -29,9 +30,7 @@ class Main extends React.Component {
     this.handleQuoteCreation = this.handleQuoteCreation.bind(this);
   }
 
-  componentDidMount() {
-    console.log("mount");
-  }
+  componentDidMount() {}
 
   handleQuoteCreation(e) {
     console.log("quote created");
@@ -47,36 +46,8 @@ class Main extends React.Component {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper} square>
-              some ad
-              {/*<AppBar*/}
-              {/*  className={classes.searchBar}*/}
-              {/*  position="static"*/}
-              {/*  color="default"*/}
-              {/*  elevation={0}*/}
-              {/*>*/}
-              {/*  <Grid container={true} spacing={3} className={classes.container}>*/}
-              {/*    <Grid item={true} xs={12}>*/}
-              {/*      <Typography variant="button">My Courses</Typography>*/}
-              {/*    </Grid>*/}
-              {/*    <Grid item={true} xs={12} sm={4}>*/}
-              {/*      <Card className={classes.root}>*/}
-              {/*        <CardActionArea*/}
-              {/*          id={"addNewCard"}*/}
-              {/*          onClick={() => this.handleClickOpenDialogueNewCourse()}*/}
-              {/*        >*/}
-              {/*          <CardContent>*/}
-              {/*            <Tooltip title={"Click to add a new course"}>*/}
-              {/*              <AddIcon />*/}
-              {/*            </Tooltip>*/}
-              {/*            <Typography gutterBottom variant="h5" component="h2">*/}
-              {/*              Add New Course*/}
-              {/*            </Typography>*/}
-              {/*          </CardContent>*/}
-              {/*        </CardActionArea>*/}
-              {/*      </Card>*/}
-              {/*    </Grid>*/}
-              {/*  </Grid>*/}
-              {/*</AppBar>*/}
+              {/*some ad*/}
+              <Dashboard />
             </Paper>
           </Grid>
           <Grid item xs={4}>
